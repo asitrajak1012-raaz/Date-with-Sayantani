@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Little Date ♡</title>
+
+<style>
+:root{
+    --bg:#f7dfe6;
+    --bg2:#fbecef;
+    --card:#fff9f1;
+    --wine:#c9145b;
+    --wine-dark:#a80f4d;
+    --text:#3d292d;
+    --muted:#8a6b73;
+    --border:#e7c8d0;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    color:var(--text);
+    overflow-x:hidden;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255,255,255,.65),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(255,244,232,.7),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            var(--bg),
+            var(--bg2),
+            #f4d9df
+        );
+}
+
+.page{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px 18px;
+    position:relative;
+}
+
+.brand{
+    position:fixed;
+    top:25px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:20;
+
+    padding:9px 17px;
+    border-radius:50px;
+
+    background:var(--wine);
+    color:white;
+
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:2px;
+
+    box-shadow:0 8px 25px rgba(159,22,77,.2);
+}
+
+.brand::after{
+    content:" ♥";
+}
+
+/* Floating hearts */
+
+.heart{
+    position:fixed;
+    color:rgba(201,20,91,.4);
+    pointer-events:none;
+    animation:floating 5s ease-in-out infinite;
+}
+
+.h1{
+    left:8%;
+    top:30%;
+    font-size:25px;
+}
+
+.h2{
+    right:9%;
+    top:25%;
+    font-size:18px;
+    animation-delay:1s;
+}
+
+.h3{
+    left:12%;
+    bottom:18%;
+    font-size:16px;
+    animation-delay:2s;
+}
+
+.h4{
+    right:8%;
+    bottom:25%;
+    font-size:26px;
+    animation-delay:1.5s;
+}
+
+@keyframes floating{
+    0%,100%{
+        transform:translateY(0) rotate(-8deg);
+        opacity:.5;
+    }
+
+    50%{
+        transform:translateY(-15px) rotate(8deg);
+        opacity:1;
+    }
+}
+
+/* Card */
+
+.card{
+    width:min(92vw,430px);
+
+    background:rgba(255,249,241,.96);
+
+    border:1px solid rgba(231,200,208,.8);
+
+    border-radius:25px;
+
+    padding:30px 25px 25px;
+
+    text-align:center;
+
+    box-shadow:
+        0 25px 70px rgba(102,49,64,.15),
+        0 4px 15px rgba(102,49,64,.07);
+}
+
+.hidden{
+    display:none;
+}
+
+/* Text */
+
+.step{
+    color:var(--wine);
+    font-size:9px;
+    font-weight:bold;
+    letter-spacing:3px;
+    margin-bottom:10px;
+}
+
+.mini-icon{
+    width:30px;
+    height:30px;
+    margin:5px auto 12px;
+
+    border-radius:50%;
+
+    display:grid;
+    place-items:center;
+
+    background:#f9e2e8;
+    color:var(--wine);
+
+    font-size:15px;
+}
+
+h1,
+h2{
+    font-family:Georgia,"Times New Roman",serif;
+    color:#4b272e;
+    margin:0;
+    line-height:1.05;
+}
+
+h1{
+    font-size:40px;
+}
+
+h2{
+    font-size:30px;
+}
+
+.sub{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.5;
+    margin:12px 0 20px;
+}
+
+/* Main button */
+
+.btn{
+    width:100%;
+    min-height:43px;
+
+    border:none;
+    border-radius:50px;
+
+    background:var(--wine);
+    color:white;
+
+    font-size:12px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    box-shadow:
+        0 8px 20px rgba(201,20,91,.2);
+}
+
+.btn:hover{
+    background:var(--wine-dark);
+    transform:translateY(-1px);
+}
+
+.btn:disabled{
+    opacity:.65;
+    cursor:wait;
+}
+
+/* ==============================
+   NO BUTTON
+============================== */
+
+.no-btn{
+    display:inline-flex;
+
+    width:auto;
+    min-width:105px;
+    height:38px;
+
+    margin-top:12px;
+    padding:0 20px;
+
+    align-items:center;
+    justify-content:center;
+
+    border:1px solid var(--border);
+    border-radius:50px;
+
+    background:#fffdf8;
+    color:#8a6b73;
+
+    font-size:11px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 4px 12px rgba(102,49,64,.08);
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
+
+    white-space:nowrap;
+
+    /* Important:
+       button remains in place */
+    position:relative;
+}
+
+.no-btn:hover{
+    background:#f9e2e8;
+    color:var(--wine);
+    border-color:#d86691;
+    transform:scale(1.04);
+}
+
+/* Inputs */
+
+.field{
+    text-align:left;
+    margin:13px 0;
+}
+
+label{
+    display:block;
+
+    font-size:8px;
+    font-weight:bold;
+    letter-spacing:2px;
+
+    color:#7b5d65;
+
+    margin-bottom:6px;
+}
+
+input,
+select{
+    width:100%;
+    height:43px;
+
+    border:1px solid var(--border);
+    border-radius:12px;
+
+    background:#fffdf8;
+
+    padding:0 12px;
+
+    color:#49383b;
+
+    outline:none;
+}
+
+input:focus,
+select:focus{
+    border-color:#d55c87;
+
+    box-shadow:
+        0 0 0 3px rgba(201,20,91,.08);
+}
+
+/* Food */
+
+.food-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin:18px 0;
+}
+
+.food{
+    height:55px;
+
+    border:1px solid var(--border);
+    border-radius:10px;
+
+    background:#fffdf8;
+    color:#5d464c;
+
+    font-size:10px;
+
+    cursor:pointer;
+
+    transition:.15s;
+}
+
+.food span{
+    display:block;
+    font-size:18px;
+    margin-bottom:2px;
+}
+
+.food:hover{
+    transform:translateY(-1px);
+    border-color:#d86691;
+}
+
+.food.selected{
+    background:var(--wine);
+    color:white;
+    border-color:var(--wine);
+
+    box-shadow:
+        0 6px 15px rgba(201,20,91,.17);
+}
+
+/* Actions */
+
+.actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+}
+
+.secondary{
+    background:#fffdf8;
+    color:#6d555b;
+    border:1px solid var(--border);
+    box-shadow:none;
+}
+
+/* Final */
+
+.date{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:18px 0 12px;
+}
+
+.pill{
+    padding:8px 12px;
+    border-radius:50px;
+
+    background:#f9e1e7;
+    color:#704b55;
+
+    font-size:10px;
+    font-weight:bold;
+}
+
+.summary{
+    background:#fffdf8;
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    padding:13px;
+
+    text-align:left;
+
+    font-size:11px;
+    line-height:1.9;
+
+    margin-bottom:18px;
+}
+
+.summary strong{
+    color:#4b272e;
+}
+
+.tiny{
+    color:#9a7b83;
+    font-size:9px;
+    margin-top:9px;
+}
+
+.success{
+    color:var(--wine);
+    font-weight:bold;
+    font-size:11px;
+    margin-top:15px;
+}
+
+/* Confetti */
+
+.confetti{
+    position:fixed;
+    top:-20px;
+    z-index:100;
+    animation:fall 3s linear forwards;
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(0) rotate(0deg);
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(110vh) rotate(720deg);
+        opacity:0;
+    }
+}
+
+@media(max-width:430px){
+
+    .card{
+        padding:26px 20px 23px;
+    }
+
+    h1{
+        font-size:35px;
+    }
+
+    h2{
+        font-size:28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <div class="brand">
+        OUR LITTLE DATE
+    </div>
+
+    <div class="heart h1">♡</div>
+    <div class="heart h2">♡</div>
+    <div class="heart h3">♡</div>
+    <div class="heart h4">♡</div>
+
+
+    <!-- ==============================
+         SCREEN 1
+    =============================== -->
+
+    <section class="card" id="screen1">
+
+        <div class="step">
+            A SMALL QUESTION
+        </div>
+
+        <div class="mini-icon">
+            ♡
+        </div>
+
+        <h1>
+           Sayantani will you go out<br>
+            on a date with me?
+        </h1>
+
+        <p class="sub">
+            Take your time.
+            There is really only one right answer here....Tum chah kar v no par click nahin kar sakti...try it 
+        </p>
+
+ <div style="
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin:0 auto 18px;
+">
+
+    <img src="her.jpeg"
+         style="
+         width:125px;
+         height:125px;
+         object-fit:cover;
+         border-radius:15px;
+         box-shadow:0 4px 12px rgba(0,0,0,0.15);
+         ">
+
+    <img src="her...jpeg"
+         style="
+         width:125px;
+         height:125px;
+         object-fit:cover;
+         border-radius:15px;
+         box-shadow:0 4px 12px rgba(0,0,0,0.15);
+         ">
+
+</div>
+
+
+        <!-- YES -->
+
+        <button
+            class="btn"
+            type="button"
+            onclick="goTo(2)"
+        >
+            Yes, I'd love to →
+        </button>
+
+
+        <!-- NO -->
+
+        <button
+            class="no-btn"
+            id="noButton"
+            type="button"
+        >
+            No
+        </button>
+
+
+        <p class="tiny">
+            No pressure. Just vibes. ♡
+        </p>
+
+    </section>
+
+
+    <!-- ==============================
+         SCREEN 2
+    =============================== -->
+
+    <section
+        class="card hidden"
+        id="screen2"
+    >
+
+        <div class="step">
+            STEP 1 OF 2
+        </div>
+
+        <div class="mini-icon">
+            ♡
+        </div>
+
+        <h2>
+            When works for you?
+        </h2>
+
+        <p class="sub">
+            Pick a date and time —
+            I'll make it special.
+        </p>
+
+
+        <div class="field">
+
+            <label>
+                DATE
+            </label>
+
+            <input
+                type="date"
+                id="date"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                TIME
+            </label>
+
+            <input
+                type="time"
+                id="time"
+                value="18:00"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                THE PLAN
+            </label>
+
+            <select id="plan">
+
+                <option>
+                    Surprise Me ♡
+                </option>
+
+                <option>
+                     Caffe
+                </option>
+
+                <option>
+                    Late Night Walk through all the puja Pandals 
+                </option>
+
+                <option>
+                    Dinner & A Movie
+                </option>
+
+                <option>
+                    Bike Riding & Dinner 
+                </option>
+
+                <option>
+                    You'll Drive
+                </option>
+
+                <option>
+                    Depends on me
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            class="btn"
+            type="button"
+            onclick="goTo(3)"
+        >
+            Next: the food →
+        </button>
+
+    </section>
+
+
+    <!-- ==============================
+         SCREEN 3
+    =============================== -->
+
+    <section
+        class="card hidden"
+        id="screen3"
+    >
+
+        <div class="step">
+            STEP 2 OF 2
+        </div>
+
+        <div class="mini-icon">
+            ♡
+        </div>
+
+        <h2>
+            What should we eat?
+        </h2>
+
+        <p class="sub">
+            The most important decision
+            of the night. Choose wisely.
+        </p>
+
+
+        <div class="food-grid">
+
+            <button
+                class="food selected"
+                type="button"
+                onclick="chooseFood(this,'Italian')"
+            >
+                <span>🍝</span>
+                Italian
+            </button>
+
+            <button
+                class="food"
+                type="button"
+                onclick="chooseFood(this,'Sushi')"
+            >
+                <span>🍣</span>
+                Bengali Food
+            </button>
+
+            <button
+                class="food"
+                type="button"
+                onclick="chooseFood(this,'Pizza')"
+            >
+                <span>🍕</span>
+                Pizza
+            </button>
+
+            <button
+                class="food"
+                type="button"
+                onclick="chooseFood(this,'Tacos')"
+            >
+                <span>🌮</span>
+                Roadside Food
+            </button>
+
+            <button
+                class="food"
+                type="button"
+                onclick="chooseFood(this,'Burgers')"
+            >
+                <span>🍔</span>
+                Burgers/KFC
+            </button>
+
+            <button
+                class="food"
+                type="button"
+                onclick="chooseFood(this,'My Type')"
+            >
+                <span>🍜</span>
+                Wherever I'll take you
+            </button>
+
+            <button
+                class="food"
+                type="button"
+                onclick="chooseFood(this,'Brunch')"
+            >
+                <span>🥞</span>
+                Your Favourite Food
+            </button>
+
+            <button
+                class="food"
+                type="button"
+                onclick="chooseFood(this,'Dessert First')"
+            >
+                <span>🍰</span>
+                Dessert First
+            </button>
+
+            <button
+                class="food"
+                type="button"
+                onclick="chooseFood(this,'You Pick')"
+            >
+                <span>♡</span>
+                You Pick
+            </button>
+
+        </div>
+
+
+        <div class="actions">
+
+            <button
+                class="btn secondary"
+                type="button"
+                onclick="goTo(2)"
+            >
+                ← Back
+            </button>
+
+            <button
+                class="btn"
+                id="submitButton"
+                type="button"
+                onclick="submitResponse()"
+            >
+                It's a date ♥️
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         SCREEN 4
+    =============================== -->
+
+    <section
+        class="card hidden"
+        id="screen4"
+    >
+
+        <div class="step">
+            CONFIRMED ♡
+        </div>
+
+        <div class="mini-icon">
+            ♥
+        </div>
+
+        <h2>
+            It's a date!
+            Pura Durgapur Ghumaunga (Puri Raat Jitna Cover Ho Jaaye)
+        </h2>
+
+        <p class="sub">
+            Okay, now I have something
+            very important to look forward to. ❤️
+        </p>
+
+
+        <div class="date">
+
+            <div
+                class="pill"
+                id="finalDate"
+            >
+                Date
+            </div>
+
+            <div
+                class="pill"
+                id="finalTime"
+            >
+                Time
+            </div>
+
+        </div>
+
+
+        <div class="summary">
+
+            <div>
+                📅
+                <strong id="showDate">
+                    Date
+                </strong>
+            </div>
+
+            <div>
+                🕐
+                <strong id="showTime">
+                    Time
+                </strong>
+            </div>
+
+            <div>
+                📍
+                <strong id="finalPlan">
+                    Plan
+                </strong>
+            </div>
+
+            <div>
+                🍽️
+                <strong id="finalFood">
+                    Food
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div
+            style="
+                width:180px;
+                height:125px;
+                margin:12px auto 18px;
+                border-radius:12px;
+                background:#f8e0e6;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                font-size:55px;
+            "
+        >
+            🥳
+        </div>
+
+
+        <div class="success">
+            Your response has been sent. ♡
+        </div>
+
+        <p class="tiny">
+            Can't wait to see you there. ❤️
+        </p>
+
+    </section>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   GOOGLE SHEETS URL
+
+   Leave this as it is for now if you
+   haven't connected Google Sheets yet.
+========================================= */
+
+const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbz2v_l8I5aXyhKDmPgV18T9OBn3i84gA6Ytc90KvxbqDfvv1rr5rEOLYZvZh0Vwi5pBGA/exec";
+
+
+/* =========================================
+   VARIABLES
+========================================= */
+
+let selectedFood = "Italian";
+
+
+/* =========================================
+   SCREEN NAVIGATION
+========================================= */
+
+function goTo(number){
+
+    document
+        .querySelectorAll(".card")
+        .forEach(function(card){
+
+            card.classList.add("hidden");
+
+        });
+
+
+    document
+        .getElementById(
+            "screen" + number
+        )
+        .classList.remove("hidden");
+}
+
+
+/* =========================================
+   FOOD SELECTION
+========================================= */
+
+function chooseFood(button, food){
+
+    document
+        .querySelectorAll(".food")
+        .forEach(function(item){
+
+            item.classList.remove(
+                "selected"
+            );
+
+        });
+
+
+    button.classList.add(
+        "selected"
+    );
+
+
+    selectedFood = food;
+}
+
+
+/* =========================================
+   NO BUTTON HOVER EFFECT
+=========================================
+
+   THIS IS THE IMPORTANT PART.
+
+   The button DOES NOT MOVE.
+
+   While the mouse stays over the
+   button, the text continuously changes.
+
+========================================= */
+
+const noButton =
+    document.getElementById(
+        "noButton"
+    );
+
+
+const noMessages = [
+
+    "No",
+
+    "Please 🥺",
+
+    "Try again",
+
+    "Are you sure?",
+
+    "Really? 😭",
+
+    "Think again",
+
+    "Please say yes",
+
+    "Don't do this 😭",
+
+    "Come onnn",
+
+    "One more chance?",
+
+    "Pretty please? 🥺",
+
+    "Okay... please? ❤️",
+
+    "Just say yes 🥺",
+
+    "You know you want to ❤️"
+
+];
+
+
+let noIndex = 0;
+
+let noHoverTimer = null;
+
+
+/* -----------------------------------------
+   MOUSE ENTER
+----------------------------------------- */
+
+noButton.addEventListener(
+    "mouseenter",
+    function(){
+
+        clearInterval(
+            noHoverTimer
+        );
+
+
+        noIndex = 0;
+
+
+        noButton.textContent =
+            noMessages[noIndex];
+
+
+        /*
+           Change the text every
+           650 milliseconds while
+           cursor remains over it.
+        */
+
+        noHoverTimer =
+            setInterval(
+                function(){
+
+                    noIndex++;
+
+
+                    /*
+                       After reaching the
+                       last message, start
+                       again from "Please".
+                    */
+
+                    if(
+                        noIndex >=
+                        noMessages.length
+                    ){
+
+                        noIndex = 1;
+
+                    }
+
+
+                    noButton.textContent =
+                        noMessages[noIndex];
+
+                },
+                650
+            );
+
+    }
+);
+
+
+/* -----------------------------------------
+   MOUSE LEAVE
+----------------------------------------- */
+
+noButton.addEventListener(
+    "mouseleave",
+    function(){
+
+        clearInterval(
+            noHoverTimer
+        );
+
+
+        noHoverTimer = null;
+
+
+        /*
+           Reset to No when the
+           cursor leaves.
+        */
+
+        noIndex = 0;
+
+        noButton.textContent =
+            "No";
+
+    }
+);
+
+
+/* -----------------------------------------
+   MOBILE TOUCH
+----------------------------------------- */
+
+noButton.addEventListener(
+    "touchstart",
+    function(event){
+
+        event.preventDefault();
+
+
+        noIndex++;
+
+
+        if(
+            noIndex >=
+            noMessages.length
+        ){
+
+            noIndex = 1;
+
+        }
+
+
+        noButton.textContent =
+            noMessages[noIndex];
+
+    },
+    {
+        passive:false
+    }
+);
+
+
+/* =========================================
+   DATE FORMAT
+========================================= */
+
+function formatDate(value){
+
+    if(!value){
+        return "No date";
+    }
+
+
+    const date =
+        new Date(
+            value + "T00:00:00"
+        );
+
+
+    return date.toLocaleDateString(
+        "en-US",
+        {
+            weekday:"long",
+            month:"long",
+            day:"numeric",
+            year:"numeric"
+        }
+    );
+}
+
+
+/* =========================================
+   TIME FORMAT
+========================================= */
+
+function formatTime(value){
+
+    if(!value){
+        return "No time";
+    }
+
+
+    const parts =
+        value.split(":");
+
+
+    const date =
+        new Date();
+
+
+    date.setHours(
+        Number(parts[0]),
+        Number(parts[1])
+    );
+
+
+    return date.toLocaleTimeString(
+        "en-US",
+        {
+            hour:"numeric",
+            minute:"2-digit"
+        }
+    );
+}
+
+
+/* =========================================
+   SUBMIT RESPONSE
+========================================= */
+
+async function submitResponse(){
+
+    const date =
+        document
+            .getElementById("date")
+            .value;
+
+
+    const time =
+        document
+            .getElementById("time")
+            .value;
+
+
+    const plan =
+        document
+            .getElementById("plan")
+            .value;
+
+
+    const button =
+        document
+            .getElementById(
+                "submitButton"
+            );
+
+
+    if(!date){
+
+        alert(
+            "Please choose a date first ❤️"
+        );
+
+        return;
+    }
+
+
+    /*
+       If Google Sheets hasn't been
+       connected, show the confirmation
+       locally instead of breaking.
+    */
+
+    const responseData = {
+
+        date:
+            formatDate(date),
+
+        time:
+            formatTime(time),
+
+        plan:
+            plan,
+
+        food:
+            selectedFood
+
+    };
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Saving... ♥️";
+
+
+    /*
+       Try sending to Google Sheets
+       if a URL has been added.
+    */
+
+    if(
+        GOOGLE_SCRIPT_URL !==
+        "PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE"
+    ){
+
+        try{
+
+            await fetch(
+                GOOGLE_SCRIPT_URL,
+                {
+                    method:"POST",
+
+                    mode:"no-cors",
+
+                    headers:{
+                        "Content-Type":
+                            "text/plain;charset=utf-8"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            responseData
+                        )
+                }
+            );
+
+        }
+        catch(error){
+
+            console.log(
+                "Response saved locally.",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* Fill confirmation */
+
+    document
+        .getElementById(
+            "finalDate"
+        )
+        .textContent =
+        responseData.date;
+
+
+    document
+        .getElementById(
+            "finalTime"
+        )
+        .textContent =
+        responseData.time;
+
+
+    document
+        .getElementById(
+            "showDate"
+        )
+        .textContent =
+        responseData.date;
+
+
+    document
+        .getElementById(
+            "showTime"
+        )
+        .textContent =
+        responseData.time;
+
+
+    document
+        .getElementById(
+            "finalPlan"
+        )
+        .textContent =
+        responseData.plan;
+
+
+    document
+        .getElementById(
+            "finalFood"
+        )
+        .textContent =
+        responseData.food;
+
+
+    goTo(4);
+
+
+    createConfetti();
+}
+
+
+/* =========================================
+   CONFETTI
+========================================= */
+
+function createConfetti(){
+
+    const symbols = [
+        "♥",
+        "♡",
+        "✦",
+        "•"
+    ];
+
+
+    for(
+        let i = 0;
+        i < 60;
+        i++
+    ){
+
+        const element =
+            document.createElement(
+                "div"
+            );
+
+
+        element.className =
+            "confetti";
+
+
+        element.textContent =
+            symbols[
+                Math.floor(
+                    Math.random() *
+                    symbols.length
+                )
+            ];
+
+
+        element.style.left =
+            Math.random() *
+            100 +
+            "vw";
+
+
+        element.style.fontSize =
+            (
+                8 +
+                Math.random() * 12
+            ) +
+            "px";
+
+
+        element.style.color =
+            Math.random() > .5
+            ? "#c9145b"
+            : "#e99ab1";
+
+
+        element.style.animationDelay =
+            Math.random() *
+            .8 +
+            "s";
+
+
+        document.body.appendChild(
+            element
+        );
+
+
+        setTimeout(
+            function(){
+
+                element.remove();
+
+            },
+            3500
+        );
+
+    }
+}
+
+</script>
+
+</body>
+</html>
